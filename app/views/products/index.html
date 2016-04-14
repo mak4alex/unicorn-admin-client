@@ -1,0 +1,79 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">		
+		<a ui-sref="admin.newproduct" class="pull-right btn btn-success">
+		  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 
+		  New Product</a>
+		<h4>Products</h4>		
+	</div>
+	<div class="panel-body">	
+		<div class="row">
+			<div class="input-group">
+			  <span class="input-group-addon" >Order By:</span>
+			  <select class="form-control"  ng-model="orderField" 
+			  				ng-options="field for field in fields">
+ 			  </select>
+			  <span class="input-group-btn">
+			    <button class="btn btn-default" ng-model="orderDirection" uib-btn-radio="'ASC'">ASC</button>
+	      	<button class="btn btn-default" ng-model="orderDirection" uib-btn-radio="'DESC'">DESC</button>	      	
+			  </span>
+			  <span class="input-group-addon">Search:</span>
+			  <input ng-model="query" type="text" class="form-control" placeholder="Search for...">
+			  <span class="input-group-addon">Per page:</span>
+			  <select class="form-control" ng-model="itemsPerPage" 
+			  				ng-options="item for item in [5, 10, 15, 25, 50]">
+ 			  </select>		
+ 			  <span class="input-group-btn">
+ 			  	<button class="btn btn-primary" ng-click="listProducts()">Refresh</button>
+ 			  </span>	  
+			</div>			
+		</div>
+		<div class="row">
+			<table class="table table-striped table-bordered">
+		    <thead>
+		      <tr>
+		        <th>id</th>
+		        <th>Title</th>
+		        <th>Description</th>
+		        <th>Price</th>
+		        <th>Weight</th>
+		        <th>Actions</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr ng-repeat="product in products">
+		        <td>{{product.id}}</td>
+		        <td>{{product.title}}</td>
+		        <td>
+		        	{{ product.description | limitTo: 30 }}{{product.description.length > 30 ? '...' : ''}}
+		        </td>
+		        <td>{{product.price | currency}}</td>
+		        <td>{{product.weight}}</td>
+		        <td class="text-center">
+		        	<div class="btn-group" role="group">
+			          <button class="btn btn-xs btn-danger"
+			                  ng-click="categories.delete(category)">Delete</button>
+			          <button class="btn btn-xs btn-warning"
+			                  ng-click="edi(category)">Edit</button>
+		          </div>
+		        </td>
+		      </tr>
+		    </tbody>
+		  </table>			
+		</div>	  
+	</div>
+  
+  <div class="panel-footer">
+  	<div class="row text-center">
+  		<uib-pagination ng-model="currentPage" items-per-page="itemsPerPage"
+  										total-items="totalItems" ng-change="pageChanged()" 
+	  								boundary-link-numbers="true" max-size="12">
+	  	</uib-pagination>
+  	</div>	  	
+	  <div class="row">
+    	
+    	
+  	</div>
+  </div>	 	
+
+</div>
+

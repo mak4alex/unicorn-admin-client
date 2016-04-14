@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name unicornAdminClientApp.controller:AboutCtrl
+ * @name unicornAdminClientApp.controller:ProfileCtrl
  * @description
- * # AboutCtrl
+ * # ProfileCtrl
  * Controller of the unicornAdminClientApp
  */
 angular.module('unicornAdminClientApp')
-  .controller('AboutCtrl', function () {
+  .controller('ProfileCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

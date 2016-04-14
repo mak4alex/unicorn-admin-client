@@ -1,0 +1,99 @@
+<div class="row">
+	<div class="col-sm-9">
+
+	<h2>New Product</h2>
+
+	<form name="productForm" ng-submit="createProduct(newProduct)" novalidate>
+		
+	  <div class="form-group has-feedback" ng-class="getValidatedClass(productForm.title)">
+	    <label for="title" class="control-label">Title</label>
+	    <input type="text" ng-model="newProduct.title" id="title" name="title" 
+	    			 class="form-control" placeholder="Product Title" ng-maxlength="32"
+	    			 ng-blur="checkUniqTitle(productForm.title)"
+	    			 ng-required="true" ng-minlength="3" />
+	    <span class="glyphicon form-control-feedback"
+       		ng-class="getFeedbackClass(productForm.title)" aria-hidden="true"></span> 
+      <span class="help-block" ng-show="productForm.title.$invalid && productForm.title.$dirty">
+				<span ng-show="productForm.title.$error.required">Please enter a value</span>
+				<span ng-show="productForm.title.$error.unique">Already exist</span>
+				<span ng-show="productForm.title.$error.minlength">Too short</span>
+				<span ng-show="productForm.title.$error.maxlength">Too long</span>
+		  </span>
+	  </div>
+
+	  <div class="form-group has-feedback" ng-class="getValidatedClass(productForm.topCategory)">
+	  	<label for="topCategory" class="control-label">Top category</label>
+	  	<select class="form-control" ng-model="newProduct.topCategory" ng-required="true"
+	  		id="topCategory" name="topCategory" ng-change="getSubCategories(newProduct.topCategory)"
+	  		ng-options="topCat.id as topCat.title for topCat in topCategories">
+ 				<option value="">(Pick One)</option>			 
+			</select>
+			<span class="help-block" ng-show="productForm.topCategory.$invalid && productForm.topCategory.$dirty">
+				<span ng-show="productForm.topCategory.$error.required">Please select a value</span>
+		  </span>
+	  </div>
+
+	  <div class="form-group has-feedback" ng-class="getValidatedClass(productForm.subCategory)">
+	  	<label for="subCategory" class="control-label">Sub category</label>
+	  	<select class="form-control" ng-model="newProduct.subCategory" ng-required="true"
+	  		id="subCategory" name="subCategory" 
+	  		ng-options="subCat.id as subCat.title for subCat in subCategories">
+ 				<option value="">(Pick One)</option>			 
+			</select>
+			<span class="help-block" ng-show="productForm.subCategory.$invalid && productForm.subCategory.$dirty">
+				<span ng-show="productForm.subCategory.$error.required">Please select a value</span>
+		  </span>
+	  </div>
+
+	  <!--
+
+	  <div class="form-group">
+	  	<label for="description">Description</label>
+	  	<textarea ng-model="newProduct.description" id="description" name="description" 
+	  						class="form-control" rows="4" ng-required="requireValue" 
+	  						ng-minlength="16"></textarea>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="price">Price</label>
+	    <input type="number" min="0.01" step="0.01" ng-model="price" id="price" 
+	    			 name="price" class="form-control" placeholder="Product Price"
+	    			 ng-required="requireValue" >
+	  </div>
+
+	  <div class="form-group">
+	    <label for="quantity">Quantity</label>
+	    <input type="number" step="1" ng-model="quantity" id="quantity" 
+	    			 name="quantity" class="form-control" placeholder="Product Quantity"
+	    			 ng-required="requireValue" >
+	  </div>
+
+	  <div class="form-group">
+	    <label for="weight">Weight</label>
+	    <input type="number" min="0.001" step="0.001" ng-model="weight" id="weight" 
+	    			 name="weight" class="form-control" placeholder="Product Weight"
+	    			 ng-required="requireValue" >
+	  </div>
+
+	  <div class="checkbox">
+	    <label>
+	      <input type="checkbox" ng-model="published"> Published?
+	    </label>
+	  </div> -->
+
+	  <button type="submit" ng-disabled="productForm.$invalid" 
+	  				class="btn btn-block btn-primary">Submit</button>
+	  <a type="button" ui-sref="admin.products" class="btn btn-block btn-warning">
+	  	<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Back</a>
+	</form>
+
+	<span class="summary" ng-class="productForm.$valid ? 'ng-valid' : 'ng-invalid'">
+		Form valid: {{productForm.$valid}}
+
+	</span>
+	<p>Title Error: {{productForm.title.$invalid}}</p>
+	<p>Required Error: {{productForm.title.$error.required}}</p>
+	<p>TopCateg required Error: {{productForm.topCategory.$error.required}}</p>
+				
+	</div>
+</div>
